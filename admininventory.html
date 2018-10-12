@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewpoint" content="width=device-width, initial-scale=1">
+    <title>TechHub - Inventory</title>
+
+    <!-- Link to font awesome icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--Links to our main css-->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <!--Link to javascript file-->
+    <script src="js/main.js"></script>
+
+
+
+</head>
+<body>
+	<div>
+		<nav class="navbar" id="myNavbar">
+			<a href="admininventory.html">TechHub - Admin Home</a>
+			<a href="attendants.html" class="float-right">Attendants</a>
+		    <a href="login.html" class="float-right">Log Out</a>
+		    <a href="javascript:void(0)" class="icon" onclick="toogleMenu()"><i class="fa fa-bars"></i></a>
+		 </nav>
+	</div>
+	<br>
+	<div class="main">
+		<div class="sales">
+            <h2>Store Inventory</h2>
+            <div>
+                <button class="newpdt greenbtn" onclick="pdt_new_form_modal()">Add Product</button>
+            </div>
+            <div class="table">
+                <table>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Min. Quantity</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                    <tr>
+                        <td>MacBooks</td>
+                        <td>$999.99</td>
+                        <td>19</td>
+                        <td>10</td>
+                        <td><button class="bluebtn">Edit</button></td>
+                        <td><button class="redbtn" onclick="deleteModal()">Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td>HP</td>
+                        <td>$499.99</td>
+                        <td>13</td>
+                        <td>10</td>
+                        <td><button class="bluebtn">Edit</button></td>
+                        <td><button class="redbtn" onclick="deleteModal()">Delete</button></td>
+                    </tr>
+                    <tr>
+                        <td>Iphone</td>
+                        <td>$899.99</td>
+                        <td>23</td>
+                        <td>10</td>
+                        <td><button class="bluebtn">Edit</button></td>
+                        <td><button class="redbtn" onclick="deleteModal()">Delete</button></td>
+                    </tr>
+                </table>
+                <div class="delete_modal" id="delete_modal">
+                    <div class="modal_content">
+                        <div class="modal_header">
+                            <span class="close" onclick="closeModal()">&times;</span>
+                        </div>
+                        <div class="modal_body">
+                            <br>
+                            <h4>Confirm delete?</h4>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#" class="redbtn btn">Confirm</a>
+                            <button class="bluebtn btn" onclick="closeModal()">Cancel</button>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+                <div class="form_modal" id="pdt_form_modal">
+                    <div class="modal_content">
+                        <span class="close" onclick="close_pdt_modal()">&times;</span>
+                        <form method="POST" class="modal_form" action="#" enctype="multipart/form-data">
+                            <h3><b>Enter new product info</b></h3>
+                            <label for="name">Enter Product Name: </label><br>
+                            <input  type="text" name="name" id="name" placeholder="Enter Product Name" required><br>
+                            <label for="price">Enter Unit Price: </label><br>
+                            <input  type="text" name="price" id="price" placeholder="Enter Unit Price" required><br>
+                            <label for="quantity">Enter Quantity: </label><br>
+                            <input  type="text" name="quantity" id="quantity" placeholder="Enter Quantity" required><br>
+                            <label for="pdt_image">Upload image of product</label><br>
+                            <input  type="file" name="pdt_image" id="pdt_image"><br>	
+                            <input type="submit" value="Save Product" id="savepdt">
+                            <button class="bluebtn btn" onclick="close_pdt_modal()">Cancel</button>
+                            <br>
+                        </form>
+                    </div>
+                </div>
+                    
+                </div>
+            </div>            
+        </div>
+	</div>
+
+
+</body>
+</html>
+<!-- This function toggles the class of myNavbar between adding and removing the responsive class -->
+<script type="text/javascript">
+
+window.onclick = function(event){
+    if (event.target == delete_modal || event.target == pdt_form_modal ) {
+        delete_modal.style.display = "none";
+        form_modal.style.display="none";
+    }
+}
+</script>
