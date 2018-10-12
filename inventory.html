@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="eng">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewpoint" content="width=device-width, initial-scale=1">
+    <title>TechHub - Inventory</title>
+
+    <!-- Link to font awesome icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--Links to our main css-->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+    <!--Link to javascript file-->
+    <script src="js/main.js"></script>
+
+
+
+</head>
+<body>
+	<div>
+		<nav class="navbar" id="myNavbar">
+            <a href="home.html">TechHub - Home</a>
+            <a href="cart.html" class="float-right"><span>3</span>Cart</a>
+            <a href="viewsales.html" class="float-right">My Sales</a>
+            <a href="myprofile.html" class="float-right">Profile</a>
+            <a href="inventory.html" class="float-right" active>Inventory</a>				 
+            <a href="login.html" class="float-right">Log Out</a>
+            <a href="javascript:void(0)" class="icon" onclick="toogleMenu()"><i class="fa fa-bars"></i></a>
+		 </nav>
+	</div>
+	<br>
+	<div class="main">
+		<div class="sales">
+            <h2>Store Inventory</h2>
+            <div class="table">
+                <table>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Min. Quantity</th>
+                    </tr>
+                    <tr>
+                        <td>MacBooks</td>
+                        <td>$999.99</td>
+                        <td>19</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>HP</td>
+                        <td>$499.99</td>
+                        <td>13</td>
+                        <td>10</td>
+                    </tr>
+                    <tr>
+                        <td>Iphone</td>
+                        <td>$899.99</td>
+                        <td>23</td>
+                        <td>10</td>
+                    </tr>
+                </table>
+            </div>            
+        </div>
+	</div>
+
+
+</body>
+</html>
+<!-- This function toggles the class of myNavbar between adding and removing the responsive class -->
+<script type="text/javascript">
+	function toogleMenu() {
+	    var nav = document.getElementById("myNavbar");
+	    if (nav.className === "navbar") {
+	        nav.className += " responsive";
+	    } else {
+	        nav.className = "navbar";
+	    }
+	}
+</script>
