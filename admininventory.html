@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="eng">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewpoint" content="width=device-width, initial-scale=1">
@@ -10,30 +11,25 @@
     <!--Links to our main css-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
 
-    <!--Link to javascript file-->
-    <script src="js/main.js"></script>
-
-
 
 </head>
+
 <body>
-	<div>
-		<nav class="navbar" id="myNavbar">
-			<a href="admininventory.html">TechHub - Admin Home</a>
-			<a href="attendants.html" class="float-right">Attendants</a>
-		    <a href="login.html" class="float-right">Log Out</a>
-		    <a href="javascript:void(0)" class="icon" onclick="toogleMenu()"><i class="fa fa-bars"></i></a>
-		 </nav>
-	</div>
-	<br>
-	<div class="main">
-		<div class="sales">
-            <h2>Store Inventory</h2>
-            <div>
-                <button class="newpdt greenbtn" onclick="pdt_new_form_modal()">Add Product</button>
-            </div>
+    <div>
+        <nav class="navbar" id="myNavbar">
+            <a href="admininventory.html">TechHub - Admin Home</a>
+            <a href="attendants.html" class="float-right">Attendants</a>
+            <a id="logout" class="float-right">Log Out</a>
+            <a href="javascript:void(0)" class="icon" onclick="toogleMenu()"><i class="fa fa-bars"></i></a>
+        </nav>
+    </div>
+    <br>
+    <div class="main">
+        <div class="sales">
+            <h2><u>Store Inventory</u></h2>
+            <div id="error" class="error"></div>
             <div class="table">
-                <table>
+                <table id="products-table">
                     <tr>
                         <th>Product</th>
                         <th>Price</th>
@@ -42,42 +38,21 @@
                         <th></th>
                         <th></th>
                     </tr>
-                    <tr>
-                        <td>MacBooks</td>
-                        <td>$999.99</td>
-                        <td>19</td>
-                        <td>10</td>
-                        <td><button class="bluebtn">Edit</button></td>
-                        <td><button class="redbtn" onclick="deleteModal()">Delete</button></td>
-                    </tr>
-                    <tr>
-                        <td>HP</td>
-                        <td>$499.99</td>
-                        <td>13</td>
-                        <td>10</td>
-                        <td><button class="bluebtn">Edit</button></td>
-                        <td><button class="redbtn" onclick="deleteModal()">Delete</button></td>
-                    </tr>
-                    <tr>
-                        <td>Iphone</td>
-                        <td>$899.99</td>
-                        <td>23</td>
-                        <td>10</td>
-                        <td><button class="bluebtn">Edit</button></td>
-                        <td><button class="redbtn" onclick="deleteModal()">Delete</button></td>
-                    </tr>
+
                 </table>
                 <div class="delete_modal" id="delete_modal">
                     <div class="modal_content">
                         <div class="modal_header">
                             <span class="close" onclick="closeModal()">&times;</span>
+                            <!-- <div id="error-form" class="error"></div> -->
                         </div>
                         <div class="modal_body">
                             <br>
                             <h4>Confirm delete?</h4>
+                            <h5 id="to_delete"></h5>
                         </div>
                         <div class="modal-footer">
-                            <a href="#" class="redbtn btn">Confirm</a>
+                            <a onclick="products.delete_product()" class="redbtn btn">Confirm</a>
                             <button class="bluebtn btn" onclick="closeModal()">Cancel</button>
                         </div>
                         <br>
@@ -86,38 +61,59 @@
                 <div class="form_modal" id="pdt_form_modal">
                     <div class="modal_content">
                         <span class="close" onclick="close_pdt_modal()">&times;</span>
-                        <form method="POST" class="modal_form" action="#" enctype="multipart/form-data">
-                            <h3><b>Enter new product info</b></h3>
+                        <form method="POST" class="modal_form" enctype="multipart/form-data">
+                            <h3 id="title"><b>Enter new product info</b></h3>
+                            <div id="error-form" class="error"></div>
                             <label for="name">Enter Product Name: </label><br>
-                            <input  type="text" name="name" id="name" placeholder="Enter Product Name" required><br>
+                            <input type="text" name="name" id="name" placeholder="Enter Product Name" required><br>
+                            <label for="model">Enter Product Model: </label><br>
+                            <input type="text" name="model" id="model" placeholder="Enter Product Model" required><br>
                             <label for="price">Enter Unit Price: </label><br>
-                            <input  type="text" name="price" id="price" placeholder="Enter Unit Price" required><br>
+                            <input type="text" name="price" id="price" placeholder="Enter Unit Price" required><br>
                             <label for="quantity">Enter Quantity: </label><br>
-                            <input  type="text" name="quantity" id="quantity" placeholder="Enter Quantity" required><br>
+                            <input type="text" name="quantity" id="quantity" placeholder="Enter Quantity" required><br>
+                            <label for="min_quantity">Enter Min Quantity: </label><br>
+                            <input type="text" name="min_quantity" id="min_quantity" placeholder="Enter Min Quantity"
+                                required><br>
+                            <select id="category" name="category">
+                                <option disabled>Select Category</option>
+                                <option value="laptops">Laptops</option>
+                                <option value="mobile phones">Mobile Phones</option>
+                            </select><br>
                             <label for="pdt_image">Upload image of product</label><br>
-                            <input  type="file" name="pdt_image" id="pdt_image"><br>	
-                            <input type="submit" value="Save Product" id="savepdt">
+                            <input type="file" name="pdt_image" id="pdt_image"><br>
+                            <input type="submit" value="Save Product" id="savepdt" onclick="products.create_product()">
                             <button class="bluebtn btn" onclick="close_pdt_modal()">Cancel</button>
                             <br>
                         </form>
                     </div>
                 </div>
-                    
-                </div>
-            </div>            
+
+            </div><br>
+            <div>
+                <button class="newpdt greenbtn" onclick="pdt_new_form_modal()">Add Product</button>
+            </div>
         </div>
-	</div>
-
-
+    </div>
+    </div>
+    <!--Link to javascript file-->
+    <script src="js/main.js"></script>
+    <script src="js/products.js"></script>
+    <script src="js/logout.js"></script>
 </body>
+
 </html>
 <!-- This function toggles the class of myNavbar between adding and removing the responsive class -->
 <script type="text/javascript">
 
-window.onclick = function(event){
-    if (event.target == delete_modal || event.target == pdt_form_modal ) {
-        delete_modal.style.display = "none";
-        form_modal.style.display="none";
+    // window.onclick = function (event) {
+    //     if (event.target == delete_modal || event.target == pdt_form_modal) {
+    //         delete_modal.style.display = "none";
+    //         form_modal.style.display = "none";
+    //     }
+    // }
+
+    window.onload = () => {
+        products.all_products(products_url)
     }
-}
 </script>

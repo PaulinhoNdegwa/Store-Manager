@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="eng">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewpoint" content="width=device-width, initial-scale=1">
@@ -10,52 +11,36 @@
     <!--Links to our main css-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
 
-    <!--Link to javascript file-->
-    <script src="js/main.js"></script>
-
-
 
 </head>
+
 <body>
-    <div class="loginpage">	
+    <div class="loginpage">
         <div class="landing">
             <h2>Welcome to TechHub</h2>
             <h4><i>The Best Store Manager</i></h4>
             <h3>Log in below</h3>
-            <button onclick="att_login_form_modal()" class="btn">Attendant</button>
-            <button onclick="admin_login_form_modal()" class="btn">Admin</button>
+            <button onclick="att_login_form_modal()" class="bluebtn btn" id="">Login</button>
         </div>
         <div class="form_modal" id="attendant_form_modal">
             <div class="modal_content">
                 <span class="close" onclick="close_form_modal()">&times;</span>
-                <form method="" class="modal_form" action="home.html">
-                    <h3>Log in as Attendant</h3>
+                <form method="POST" class="modal_form">
+                    <h3>Log in below</h3>
+                    <div id="error-form" class="error"></div>
                     <label for="email">Email: </label><br>
-                    <input  type="email" name="email" id="email" placeholder="Enter Email"required><br>
+                    <input type="email" name="email" id="email" placeholder="Enter Email" required><br>
                     <label for="password">Password: </label><br>
-                    <input  type="password" name="password" id="password" placeholder="Enter Password"required><br>
-                    <input type="checkbox" name="rememberme"> Remember me <br>
-                    <input type="submit" value="Login">
-                    <br>
-                </form>
-            </div>
-        </div>
-        <div class="form_modal" id="admin_form_modal">
-            <div class="modal_content">
-                <span class="close" onclick="close_form_modal()">&times;</span>
-                <form method="" class="modal_form" action="admininventory.html">
-                    <h3>Log in as Admin</h3>
-                    <label for="email">Email: </label><br>
-                    <input  type="email" name="email" id="email" placeholder="Enter Email"required><br>
-                    <label for="password">Password: </label><br>
-                    <input  type="password" name="password" id="password" placeholder="Enter Password"required><br>
-                    <input type="checkbox" name="rememberme"> Remember me <br>
-                    <input type="submit" value="Login">
+                    <input type="password" name="password" id="password" placeholder="Enter Password" required><br>
+                    <!-- <input type="checkbox" name="rememberme"> Remember me <br> -->
+                    <input type="submit" id="login_btn" value=" Login">
                     <br>
                 </form>
             </div>
         </div>
     </div>
+    <script src="js/main.js"></script>
+    <script src="js/login.js"></script>
 </body>
-</html>
 
+</html>

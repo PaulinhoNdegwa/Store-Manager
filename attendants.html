@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="eng">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewpoint" content="width=device-width, initial-scale=1">
@@ -10,87 +11,56 @@
     <!--Links to our main css-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
 
-    <!--Link to javascript file-->
-    <script src="js/main.js"></script>
-
-
-
 </head>
+
 <body>
-	<div>
-		<nav class="navbar" id="myNavbar">
-			<a href="admininventory.html">TechHub - Admin Home</a>
-			<a href="attendants.html" class="float-right" :active>Attendants</a>
-		    <a href="login.html" class="float-right">Log Out</a>
-		    <a href="javascript:void(0)" class="icon" onclick="toogleMenu()"><i class="fa fa-bars"></i></a>
-		 </nav>
-	</div>
-	<br>
-	<div class="main">
-		<div class="sales">
+    <div>
+        <nav class="navbar" id="myNavbar">
+            <a href="admininventory.html">TechHub - Admin Home</a>
+            <a id="logout" class="float-right">Log Out</a>
+            <a href="javascript:void(0)" class="icon" onclick="toogleMenu()"><i class="fa fa-bars"></i></a>
+        </nav>
+    </div>
+    <br>
+    <div class="main">
+        <div class="sales">
             <h2><u>Attendants</u></h2>
-            <div>
-                <button class="newpdt greenbtn" onclick="att_new_form_modal()">Add attendant</button>
-            </div>
+
             <div class="table">
-                <table>
+                <table id="users-table">
                     <tr>
-                        <th>Name</th>
-                        <th>Admin?</th>
-                        <th>Total Sales</th>
-                        <th>Sales</th>
+                        <th>User id</th>
+                        <th>Email</th>
+                        <th>Role</th>
+                        <th></th>
                         <th></th>
                     </tr>
-                    <tr>
-                        <td>Kim Centa</td>
-                        <td>No</td>
-                        <td>30,782.83</td>
-                        <td><a href="viewsales.html">View Sales</a></td>
-                        <td><button class="bluebtn" onclick="make_admin_modal()">Make Admin</button></td>
-                    </tr>
-                    <tr>
-                        <td>Mary Jane</td>
-                        <td>No</td>
-                        <td>30,782.83</td>
-                        <td><a href="viewsales.html">View Sales</a></td>
-                        <td><button class="bluebtn" onclick="make_admin_modal()">Make Admin</button></td>
-                    </tr>
-                    <tr>
-                        <td>June Jan</td>
-                        <td>No</td>
-                        <td>10,782.83</td>
-                        <td><a href="viewsales.html">View Sales</a></td>
-                        <td><button class="bluebtn" onclick="make_admin_modal()">Make Admin</button></td>
-                    </tr>
-                    <tr>
-                        <td>Kamar Centa</td>
-                        <td>No</td>
-                        <td>67,782.83</td>
-                        <td><a href="viewsales.html">View Sales</a></td>
-                        <td><button class="bluebtn" onclick="make_admin_modal()">Make Admin</button></td>
-                    </tr>
-                    <tr>
-                        <td>Hannah Lee</td>
-                        <td>No</td>
-                        <td>34,782.83</td>
-                        <td><a href="viewsales.html">View Sales</a></td>
-                        <td><button class="bluebtn" onclick="make_admin_modal()">Make Admin</button></td>
-                    </tr>
-                    <tr>
-                        <td>Ken Fit</td>
-                        <td>Yes</td>
-                        <td>60,782.83</td>
-                        <td><a href="viewsales.html">View Sales</a></td>
-                        <td><button class="bluebtn" onclick="make_admin_modal()">Make Admin</button></td>
-                    </tr>
-                    <tr>
+
+                    <!-- <tr>
                         <td>Jane Centa</td>
                         <td>No</td>
                         <td>30,232.83</td>
                         <td><a href="viewsales.html">View Sales</a></td>
                         <td><button class="bluebtn" onclick="make_admin_modal()">Make Admin</button></td>
-                    </tr>
+                    </tr> -->
                 </table>
+                <div class="delete_modal" id="delete_modal">
+                    <div class="modal_content">
+                        <div class="modal_header">
+                            <span class="close" onclick="closeModal()">&times;</span>
+                        </div>
+                        <div class="modal_body">
+                            <br>
+                            <h4>Confirm delete?</h4>
+                            <h5 id="to_delete"></h5>
+                        </div>
+                        <div class="modal-footer">
+                            <a onclick="users.delete_user()" class="redbtn btn">Confirm</a>
+                            <button class="bluebtn btn" onclick="closeModal()">Cancel</button>
+                        </div>
+                        <br>
+                    </div>
+                </div>
                 <div class="admin_modal" id="admin_modal">
                     <div class="modal_content">
                         <div class="modal_header">
@@ -98,10 +68,16 @@
                         </div>
                         <div class="modal_body">
                             <br>
-                            <h4>Confirm action</h4>
+                            <h4>Confirm edit</h4>
+                            <h5 id="user_to_edit"></h5>
+                            <select id="new-role" name="new-role">
+                                <option disabled>Select Role</option>
+                                <option value="admin">Admin</option>
+                                <option value="attendant">Attendant</option>
+                            </select>
                         </div>
                         <div class="modal-footer">
-                            <a href="#" class="greenbtn btn">Confirm</a>
+                            <a onclick="users.edit_user()" class="greenbtn btn">Confirm</a>
                             <button class="bluebtn btn" onclick="close_make_admin_modal()">Cancel</button>
                         </div>
                         <br>
@@ -110,38 +86,53 @@
                 <div class="form_modal" id="att_form_modal">
                     <div class="modal_content">
                         <span class="close" onclick="close_att_form_modal()">&times;</span>
-                        <form method="POST" class="modal_form" action="#" enctype="multipart/form-data">
-                            <h3><b>Enter new attendant info</b></h3>
-                            <label for="name">Enter Full Name: </label><br>
-                            <input  type="text" name="name" id="name" placeholder="Enter Your Name" required><br>
+                        <form method="POST" class="modal_form" enctype="multipart/form-data">
+                            <h3><b>Enter new user info</b></h3>
+                            <div id="error-form" class="error"></div>
                             <label for="email">Enter Email: </label><br>
-                            <input  type="email" name="email" id="email" placeholder="Enter Email Adress" required><br>
+                            <input type="email" name="email" id="email" placeholder="Enter Email Adress" required><br>
                             <label for="password">Enter Password: </label><br>
-                            <input  type="password" name="password" id="password" placeholder="Enter Password" required><br>
+                            <input type="password" name="password" id="password" placeholder="Enter Password" required><br>
                             <label for="confirm_password">Confirm Password: </label><br>
-                            <input  type="password" name="confirm_password" id="confirm_password" placeholder="Re-enter Password " required><br>
-                            <input type="submit" class="greenbtn btn"value="Register">
+                            <input type="password" name="confirm_password" id="confirm_password" placeholder="Re-enter Password "
+                                required><br>
+                            <select id="role" name="role">
+                                <option disabled>Select Role</option>
+                                <option value="admin" id="role_admin">Admin</option>
+                                <option value="attendant" id="role_attendant">Attendant</option>
+                            </select>
+                            <input type="submit" id="create_user" onclick="users.create_user()" class="greenbtn btn"
+                                value="Register">
                             <button class="bluebtn btn" onclick="close_att_form_modal()">Cancel</button>
                             <br>
                         </form>
                     </div>
                 </div>
-                    
-                </div>
-            </div>            
+
+            </div><br>
+            <div>
+                <button class="newpdt greenbtn" onclick="att_new_form_modal()">Add new user</button>
+            </div>
         </div>
-	</div>
-
-
+    </div>
+    </div>
+    <script src="js/main.js"></script>
+    <script src="js/users.js"></script>
+    <script src="js/logout.js"></script>
 </body>
+
 </html>
 <!-- This function toggles the class of myNavbar between adding and removing the responsive class -->
 <script type="text/javascript">
 
-window.onclick = function(event){
-    if (event.target == admin_modal || event.target == att_form_modal ) {
-        admin_modal.style.display = "none";
-        form_modal.style.display="none";
+    window.onclick = function (event) {
+        if (event.target == admin_modal || event.target == att_form_modal) {
+            admin_modal.style.display = "none";
+            form_modal.style.display = "none";
+        }
     }
-}
+
+    window.onload = () => {
+        users.get_users()
+    }
 </script>
