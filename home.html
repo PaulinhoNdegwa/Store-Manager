@@ -1,104 +1,71 @@
 <!DOCTYPE html>
 <html lang="eng">
+
 <head>
-    <meta charset="utf-8">
-    <meta name="viewpoint" content="width=device-width, initial-scale=1">
-    <title>TechHub - Home</title>
+	<meta charset="utf-8">
+	<meta name="viewpoint" content="width=device-width, initial-scale=1">
+	<title>TechHub - Home</title>
 
-    <!-- Link to font awesome icons-->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!--Links to our main css-->
-    <link rel="stylesheet" type="text/css" href="css/main.css">
-
-    <!--Link to javascript file-->
-    <script src="js/main.js"></script>
-
-
+	<!-- Link to font awesome icons-->
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<!--Links to our main css-->
+	<link rel="stylesheet" type="text/css" href="css/main.css">
 
 </head>
+
 <body>
 	<div>
 		<nav class="navbar" id="myNavbar">
 			<a href="home.html">TechHub - Home</a>
-			<a href="cart.html" class="float-right"><span>3</span>Cart</a>
-			<a href="viewsales.html" class="float-right">My Sales</a>
+			<a href="cart.html" class="float-right"><span id='cart-span'></span>Cart</a>
+			<!-- <a href="viewsales.html" class="float-right">My Sales</a> -->
 			<a href="myprofile.html" class="float-right">Profile</a>
-			<a href="inventory.html" class="float-right">Inventory</a>				 
-		    <a href="login.html" class="float-right">Log Out</a>
-		    <a href="javascript:void(0)" class="icon" onclick="toogleMenu()"><i class="fa fa-bars"></i></a>
-		 </nav>
+			<a href="inventory.html" class="float-right">Inventory</a>
+			<a id="logout" class="float-right">Log Out</a>
+			<a href="javascript:void(0)" class="icon" onclick="toogleMenu()"><i class="fa fa-bars"></i></a>
+		</nav>
 	</div>
 	<br>
 	<div class="main">
 		<div>
 			<form action="">
-				<h2>Welcome to TechHub</h2>
-				<input type="text" placeholder="Search products" id="searchpdt">
+				<h1>Welcome to TechHub</h1>
+				<h3><u><i>For the best Laptops and Mobile Phone deals</i></u></h3>
+				<!-- <input type="text" placeholder="Search products" id="searchpdt">
 				<select name="category" id="searchcat">
 					<option value="#" disabled active>Select Category</option>
 					<option value="Laptops">Laptops</option>
 					<option value="Phones">Phones</option>
-				</select>
+				</select> -->
+				<div id="error" class="error"></div>
 			</form>
 
 		</div>
-		
-		<div class="product-grid">
-			<div class="product">
-				<h3>MacBook $999.99</h3>
-				<img src="img/macbook.jpeg" alt="MacBook Img"><br>
-				<p>Select this item to add to cart</p><br>
-				<a href="#" class="greenbtn  btn">Add</a><br><br>
-			</div>
-			<!-- <br> -->
-			<div class="product">
-				<h3>MacBook $999.99</h3>
-				<img src="img/macbook.jpeg" alt="MacBook Img"><br>
-				<p>Select this item to add to cart</p><br>
-				<a href="#" class="greenbtn btn">Add</a><br><br>
-			</div>
-			<!-- <br> -->
-			<div class="product">
-				<h3>MacBook $999.99</h3>
-				<img src="img/macbook.jpeg" alt="MacBook Img"><br>
-				<p>Select this item to add to cart</p><br>
-				<a href="#" class="greenbtn btn">Add</a><br><br>
-			</div>
-			<div class="product">
-					<h3>MacBook $999.99</h3>
-					<img src="img/macbook.jpeg" alt="MacBook Img"><br>
-					<p>Select this item to add to cart</p><br>
-					<a href="#" class="greenbtn btn">Add</a><br><br>
-				</div>
-				<!-- <br> -->
-				<div class="product">
-					<h3>MacBook $999.99</h3>
-					<img src="img/macbook.jpeg" alt="MacBook Img"><br>
-					<p>Select this item to add to cart</p><br>
-					<a href="#" class="greenbtn btn">Add</a><br><br>
-				</div>
-				<!-- <br> -->
-				<div class="product">
-					<h3>MacBook $999.99</h3>
-					<img src="img/macbook.jpeg" alt="MacBook Img"><br>
-					<p>Select this item to add to cart</p><br>
-					<a href="#" class="greenbtn btn">Add</a><br><br>
-				</div>
-			<!-- <br> -->
-		</div>
-	</div>
 
+		<div class="product-grid" id="product-grid"></div>
+	</div>
+	<!--Link to javascript file-->
+	<script src="js/main.js"></script>
+	<script src="js/products.js"></script>
+	<script src="js/sales.js"></script>
+	<script src="js/logout.js"></script>
 
 </body>
+
 </html>
 <!-- This function toggles the class of myNavbar between adding and removing the responsive class -->
 <script type="text/javascript">
 	function toogleMenu() {
-	    var nav = document.getElementById("myNavbar");
-	    if (nav.className === "navbar") {
-	        nav.className += " responsive";
-	    } else {
-	        nav.className = "navbar";
-	    }
+		var nav = document.getElementById("myNavbar");
+		if (nav.className === "navbar") {
+			nav.className += " responsive";
+		} else {
+			nav.className = "navbar";
+		}
+	}
+	window.onload = () => {
+		products.all_products(products_url)
+		set_cart_total()
+
 	}
 </script>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="eng">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewpoint" content="width=device-width, initial-scale=1">
@@ -10,75 +11,63 @@
     <!--Links to our main css-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
 
+</head>
+
+<body>
+    <div>
+        <nav class="navbar" id="myNavbar">
+            <a href="home.html">TechHub - Home</a>
+            <a href="cart.html" class="float-right"><span id="cart-span"></span>Cart</a>
+            <!-- <a href="viewsales.html" class="float-right">My Sales</a> -->
+            <a href="myprofile.html" class="float-right" active>Profile</a>
+            <a href="inventory.html" class="float-right">Inventory</a>
+            <a id="logout" class="float-right">Log Out</a>
+            <a href="javascript:void(0)" class="icon" onclick="toogleMenu()"><i class="fa fa-bars"></i></a>
+        </nav>
+    </div>
+    <br>
+    <div class="main">
+        <div class="sales">
+            <h2><u>My Profile</u></h2>
+            <div id="profile">
+
+            </div>
+            <h3><u>My Sales</u></h3>
+            <div class="table">
+                <table id="profile-table">
+                    <tr>
+                        <th>Product Id</th>
+                        <th>Product</th>
+                        <th>Quantity sold</th>
+                        <th>Unit Price</th>
+                    </tr>
+
+                </table>
+                <h3 id="total">Total Amount: Ksh </h3>
+            </div>
+        </div>
+    </div>
+    </div>
     <!--Link to javascript file-->
     <script src="js/main.js"></script>
-
-
-
-</head>
-<body>
-	<div>
-		<nav class="navbar" id="myNavbar">
-            <a href="home.html">TechHub - Home</a>
-            <a href="cart.html" class="float-right"><span>3</span>Cart</a>
-            <a href="viewsales.html" class="float-right">My Sales</a>
-            <a href="myprofile.html" class="float-right" active>Profile</a>
-            <a href="inventory.html" class="float-right">Inventory</a>				 
-            <a href="login.html" class="float-right">Log Out</a>
-            <a href="javascript:void(0)" class="icon" onclick="toogleMenu()"><i class="fa fa-bars"></i></a>
-		 </nav>
-	</div>
-	<br>
-	<div class="main">
-		<div class="sales">
-            <h2>My Profile</h2>            
-            <div class="table">
-                <table>
-                    <tr>
-                        <th></th>
-                        <th></th>
-                    </tr>
-                    <tr>
-                        <td>Name: </td>
-                        <td>Jecinta Senta</td>
-                    </tr>
-                    <tr>
-                        <td>Email: </td>
-                        <td>cintasenta@techhub.com</td>
-                    </tr>
-                    <tr>
-                        <td>Date Added:</td>
-                        <td>12th May 2016</td>
-                    </tr>
-                    <tr>
-                        <td>Total Sales Sold: </td>
-                        <td><a href="viewsales.html">See my sales</a></td>
-                    </tr>
-                    <tr>
-                        <td>Products sold:</td>
-                        <td>34 MacBooks, 23 HP, 100 IPhones</td>
-                    </tr>
-                    <tr>
-                        <td>Total worth of goods:</td>
-                        <td>$20,199.67</td>
-                    </tr>
-                </table>
-            </div>
-            </div>            
-        </div>
-	</div>
-
+    <script src="js/logout.js"></script>
+    <script src="js/sales.js"></script>
 
 </body>
+
 </html>
 <!-- This function toggles the class of myNavbar between adding and removing the responsive class -->
-<!-- <script type="text/javascript">
-	function toogleMenu() {
-	    var nav = document.getElementById("myNavbar");
-	    if (nav.className === "navbar") {
-	        nav.className += " responsive";
-	    } else {
-	        nav.className = "navbar";
-	    }
-	}
-</script> -->
+<script type="text/javascript">
+    function toogleMenu() {
+        var nav = document.getElementById("myNavbar");
+        if (nav.className === "navbar") {
+            nav.className += " responsive";
+        } else {
+            nav.className = "navbar";
+        }
+    }
+    window.onload = () => {
+        profile.get_profile()
+        set_cart_total()
+    }
+</script>

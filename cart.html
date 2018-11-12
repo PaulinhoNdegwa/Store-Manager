@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="eng">
+
 <head>
     <meta charset="utf-8">
     <meta name="viewpoint" content="width=device-width, initial-scale=1">
@@ -10,74 +11,60 @@
     <!--Links to our main css-->
     <link rel="stylesheet" type="text/css" href="css/main.css">
 
-    <!--Link to javascript file-->
-    <script src="js/main.js"></script>
-
-
-
 </head>
+
 <body>
-	<div>
-		<nav class="navbar" id="myNavbar">
-			<a href="home.html">TechHub - Home</a>
-			<a href="cart.html" class="float-right" :active><span>3</span>Cart</a>
-			<a href="viewsales.html" class="float-right">My Sales</a>
-			<a href="myprofile.html" class="float-right">Profile</a>
-			<a href="inventory.html" class="float-right">Inventory</a>				 
-		    <a href="login.html" class="float-right">Log Out</a>
-		    <a href="javascript:void(0)" class="icon" onclick="toogleMenu()"><i class="fa fa-bars"></i></a>
-		 </nav>
-	</div>
-	<br>
-	<div class="main">
-		<div class="sales">
-            <h2>View Cart</h2>
+    <div>
+        <nav class="navbar" id="myNavbar">
+            <a href="home.html">TechHub - Home</a>
+            <a href="cart.html" class="float-right" :active><span id="cart-span"></span>Cart</a>
+            <!-- <a href="viewsales.html" class="float-right">My Sales</a> -->
+            <a href="myprofile.html" class="float-right">Profile</a>
+            <a href="inventory.html" class="float-right">Inventory</a>
+            <a id="logout" class="float-right">Log Out</a>
+            <a href="javascript:void(0)" class="icon" onclick="toogleMenu()"><i class="fa fa-bars"></i></a>
+        </nav>
+    </div>
+    <br>
+    <div class="main">
+        <div class="sales">
+            <h2><u>View Cart</u></h2>
             <div class="table">
-                <table>
+                <div id="error" class="error"></div>
+                <table id="cart-table">
                     <tr>
-                        <th>Quantity</th>
+                        <th>Item Id</th>
                         <th>Product</th>
-                        <th>Unit Price</th>
-                        <th></th>
+                        <th>Quantity</th>
+                        <th>Total Price</th>
                     </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>MacBooks</td>
-                        <td>$999.99</td>
-                        <td><span>&times</span>Remove</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>HP</td>
-                        <td>$499.99</td>
-                        <td><span>&times</span>Remove</td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>Iphone</td>
-                        <td>$899.99</td>
-                        <td><span>&times</span>Remove</td>
-                    </tr>
-                    <tr></tr>
                 </table>
-                <h3>Total Amount: 4389.99</h3>
+                <h3 id="total">Total Amount: Ksh </h3>
                 <br>
             </div>
-            <a href="#" class="greenbtn btn" id="" >CheckOut</a>            
+            <a onclick="cart.checkout_cart()" class="greenbtn btn" id="">CheckOut</a>
         </div>
-	</div>
-
+    </div>
+    <!--Link to javascript file-->
+    <script src="js/main.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/logout.js"></script>
 
 </body>
+
 </html>
 <!-- This function toggles the class of myNavbar between adding and removing the responsive class -->
 <script type="text/javascript">
-	function toogleMenu() {
-	    var nav = document.getElementById("myNavbar");
-	    if (nav.className === "navbar") {
-	        nav.className += " responsive";
-	    } else {
-	        nav.className = "navbar";
-	    }
-	}
+    function toogleMenu() {
+        var nav = document.getElementById("myNavbar");
+        if (nav.className === "navbar") {
+            nav.className += " responsive";
+        } else {
+            nav.className = "navbar";
+        }
+    }
+    window.onload = () => {
+        cart.get_cart()
+        set_cart_total()
+    }
 </script>
