@@ -18,6 +18,7 @@
     <div>
         <nav class="navbar" id="myNavbar">
             <a href="admininventory.html">TechHub - Admin Home</a>
+            <a href="categories.html" class="float-right">Categories</a>
             <a href="attendants.html" class="float-right">Attendants</a>
             <a id="logout" class="float-right">Log Out</a>
             <a href="javascript:void(0)" class="icon" onclick="toogleMenu()"><i class="fa fa-bars"></i></a>
@@ -35,6 +36,7 @@
                         <th>Price</th>
                         <th>Quantity</th>
                         <th>Min. Quantity</th>
+                        <th>Category</th>
                         <th></th>
                         <th></th>
                     </tr>
@@ -75,10 +77,8 @@
                             <label for="min_quantity">Enter Min Quantity: </label><br>
                             <input type="text" name="min_quantity" id="min_quantity" placeholder="Enter Min Quantity"
                                 required><br>
-                            <select id="category" name="category">
+                            <select id="select_cat" name="select_cat">
                                 <option disabled>Select Category</option>
-                                <option value="laptops">Laptops</option>
-                                <option value="mobile phones">Mobile Phones</option>
                             </select><br>
                             <label for="pdt_image">Upload image of product</label><br>
                             <input type="file" name="pdt_image" id="pdt_image"><br>
@@ -99,6 +99,7 @@
     <!--Link to javascript file-->
     <script src="js/main.js"></script>
     <script src="js/products.js"></script>
+    <script src="js/category.js"></script>
     <script src="js/logout.js"></script>
 </body>
 
@@ -106,14 +107,8 @@
 <!-- This function toggles the class of myNavbar between adding and removing the responsive class -->
 <script type="text/javascript">
 
-    // window.onclick = function (event) {
-    //     if (event.target == delete_modal || event.target == pdt_form_modal) {
-    //         delete_modal.style.display = "none";
-    //         form_modal.style.display = "none";
-    //     }
-    // }
-
     window.onload = () => {
         products.all_products(products_url)
+        window.localStorage.setItem("cat_loc", "inventory")
     }
 </script>

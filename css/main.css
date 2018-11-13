@@ -380,7 +380,7 @@ tr:hover {
 	padding-bottom: 30px;
 }
 .modal_form input[type=text], .modal_form select,.modal_form  [type=email],
-.modal_form  input[type=password]{
+.modal_form  input[type=password], textarea{
     width: 80%;
     padding: 12px 20px;
     margin: 8px 0;

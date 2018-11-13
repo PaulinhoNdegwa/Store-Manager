@@ -47,7 +47,7 @@ const products = {
         let price = document.getElementById('price').value;
         let quantity = document.getElementById('quantity').value;
         let min_quantity = document.getElementById('min_quantity').value;
-        let category = document.getElementById('category').value;
+        let category = document.getElementById('select_cat').value;
 
         product_data = JSON.stringify({
             "product_name": name,
@@ -105,7 +105,7 @@ const products = {
         let price = document.getElementById('price').value;
         let quantity = document.getElementById('quantity').value;
         let min_quantity = document.getElementById('min_quantity').value;
-        let category = document.getElementById('category').value;
+        let category = document.getElementById('select_cat').value;
 
         product_data = JSON.stringify({
             "product_name": name,
@@ -141,12 +141,8 @@ const products = {
                 else if (data.msg == 'Token has expired') {
                     window.location.href = "login.html";
                 }
-                else if (data.message != "Product successfully updated") {
-                    display_form_error(data.message)
-                }
                 else if (data.message == "Product successfully updated") {
                     window.location.reload()
-                    // map_products.map_to_grid(data.Products)
                 }
                 else {
                     display_form_error(data.message)
@@ -160,7 +156,7 @@ const products = {
     delete_product: (url) => {
         token = "Bearer " + localStorage.getItem('token')
         id = localStorage.getItem('delete_id')
-        console.log(id)
+
         fetch(`${products_url}/${id}`, {
             method: "DELETE",
             headers: {
@@ -268,6 +264,7 @@ const map_products = {
                         <td>${product.unit_price}</td>
                         <td>${product.quantity}</td>
                         <td>${product.min_quantity}</td>
+                        <td>${product.category}</td>
                         <td><button class="bluebtn" onclick="pdt_edit_form_modal('${id}','${name}','${model}', '${unit_price}')">Edit</button></td>
                         <td><button class="redbtn" onclick="deleteModal('${product.product_id}','${product.product_name} ${product.product_model}')">Delete</button></td>
                     </tr>
@@ -289,6 +286,7 @@ const map_products = {
                         <td>${product.unit_price}</td>
                         <td>${product.quantity}</td>
                         <td>${product.min_quantity}</td>
+                        <td>${product.category}</td>
                     </tr>
                     `;
             // console.log(table)
