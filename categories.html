@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="eng">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewpoint" content="width=device-width, initial-scale=1">
+    <title>TechHub - Inventory</title>
+
+    <!-- Link to font awesome icons-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--Links to our main css-->
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+
+</head>
+
+<body>
+    <div>
+        <nav class="navbar" id="myNavbar">
+            <a href="admininventory.html">TechHub - Admin Home</a>
+            <a href="attendants.html" class="float-right">Attendants</a>
+            <a id="logout" class="float-right">Log Out</a>
+            <a href="javascript:void(0)" class="icon" onclick="toogleMenu()"><i class="fa fa-bars"></i></a>
+        </nav>
+    </div>
+    <br>
+    <div class="main">
+        <div class="sales">
+            <h2><u>Categories</u></h2>
+
+            <div class="table">
+                <table id="cat-table">
+                    <tr>
+                        <th>Category id</th>
+                        <th>Name</th>
+                        <th>Description</th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+
+                </table>
+                <div class="delete_modal" id="delete_modal">
+                    <div class="modal_content">
+                        <div class="modal_header">
+                            <span class="close" onclick="closeModal()">&times;</span>
+                        </div>
+                        <div class="modal_body">
+                            <br>
+                            <h4>Confirm delete?</h4>
+                            <h5 id="to_delete"></h5>
+                        </div>
+                        <div class="modal-footer">
+                            <a onclick="categories.delete_category()" class="redbtn btn">Confirm</a>
+                            <button class="bluebtn btn" onclick="closeModal()">Cancel</button>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+
+                <div class="form_modal" id="cat_form_modal">
+                    <div class="modal_content">
+                        <span class="close" onclick="close_cat_form_modal()">&times;</span>
+                        <form method="POST" class="modal_form">
+                            <h3 id="title"><b>Enter new category info</b></h3>
+                            <div id="error-form" class="error"></div>
+                            <label for="cat_name">Enter Name: </label><br>
+                            <input type="text" name="cat_name" id="cat_name" placeholder="Enter Category Name" required><br>
+                            <label for="cat_desc">Enter Description: </label><br>
+                            <textarea name="cat_desc" id="cat_desc" placeholder="Enter Category Description" required></textarea><br>
+
+                            <input type="submit" id="create_cat" onclick="categories.create_category()" class="greenbtn btn"
+                                value="Save">
+                            <button class="bluebtn btn" onclick="close_cat_form_modal()">Cancel</button>
+                            <br>
+                        </form>
+                    </div>
+                </div>
+
+            </div><br>
+            <div>
+                <button class="newpdt greenbtn" onclick="cat_new_form_modal()">Add new category</button>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="js/main.js"></script>
+    <script src="js/category.js"></script>
+    <script src="js/logout.js"></script>
+</body>
+
+</html>
+<!-- This function toggles the class of myNavbar between adding and removing the responsive class -->
+<script type="text/javascript">
+
+    window.onload = () => {
+        categories.get_categories()
+        window.localStorage.setItem("cat_loc", "table")
+    }
+</script>
